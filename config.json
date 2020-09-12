@@ -1,0 +1,11 @@
+{"config": {
+    "service": {
+      "userAgent": ""
+    },
+    "finviz": {
+      "url": "",
+      "multiplicators": [],
+      "tickers": []
+    }
+  }
+}
