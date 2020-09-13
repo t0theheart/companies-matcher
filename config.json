@@ -6,6 +6,14 @@
       "url": "",
       "multiplicators": [],
       "tickers": []
+    },
+  "marketwatch": {
+      "url": "",
+      "tickers": [],
+      "topics": [],
+      "endpoints": {
+        "incomeStatement": ""
+      }
     }
   }
 }
