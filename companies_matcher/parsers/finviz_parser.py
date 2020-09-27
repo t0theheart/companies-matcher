@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 from companies_matcher.config import config
 from .abc import ParserABC
-import requests
+import aiohttp
 
 
 URL = config['finviz']['url']
@@ -16,9 +16,10 @@ class FinvizParser(ParserABC):
         self._tickers = tickers
         self._multiplicators = multiplicators
 
-    def _request_html(self, ticker: str):
-        response = requests.get(self._url, params={'t': ticker}, headers=self._headers)
-        return response.text
+    async def _request_html(self, ticker: str):
+        async with aiohttp.ClientSession() as session:
+            async with session.get(self._url, params={'t': ticker}, headers=self._headers) as resp:
+                return await resp.text()
 
     def _parse_html(self, html: str):
         result = dict()
