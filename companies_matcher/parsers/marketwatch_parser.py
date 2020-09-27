@@ -1,22 +1,21 @@
 from bs4 import BeautifulSoup
 from companies_matcher.config import config
 from .abc import ParserABC
-import requests
+import aiohttp
 
 
 URL = config['marketwatch']['url']
 HEADERS = {'User-Agent': config['service']['userAgent']}
-ENDPOINT = config['marketwatch']['endpoints']['incomeStatement']
 
 
 class MarketwatchParser(ParserABC):
     _url = URL
     _headers = HEADERS
-    _endpoint = ENDPOINT
 
-    def __init__(self, tickers: list, topics: list):
+    def __init__(self, report: str, tickers: list, topics: list):
         self._tickers = tickers
         self._topics = topics
+        self._endpoint = report
 
     @staticmethod
     def _parse_period(soup: BeautifulSoup):
@@ -32,10 +31,11 @@ class MarketwatchParser(ParserABC):
                 result[item].update({key: values})
         return result
 
-    def _request_html(self, ticker: str):
+    async def _request_html(self, ticker: str):
         url = self._url + f'{ticker}/{self._endpoint}'
-        response = requests.get(url, headers=self._headers)
-        return response.text
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url, headers=self._headers) as resp:
+                return await resp.text()
 
     def _parse_html(self, html: str):
         data = dict()

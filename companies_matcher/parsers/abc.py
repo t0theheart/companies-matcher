@@ -16,7 +16,6 @@ class ParserABC(ABC):
     async def get_data(self) -> dict:
         result = {}
         for ticker in self._tickers:
-            print(ticker)
             result.update(await self._get_one(ticker))
         return result
 
