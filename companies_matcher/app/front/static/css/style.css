@@ -1,0 +1,24 @@
+.logo-row {
+  height: 107px;
+  background-color: RGB(140, 140, 140);
+}
+
+.logo-text {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 400%;
+    color: RGB(224, 218, 43);
+    text-shadow: 2px 1px 2px #000;
+}
+
+.topic-text {
+    font-size: 110%;
+}
+
+.tickers-input-row {
+    height: 80px;
+    background-color: RGB(190, 190, 190);
+}
+
+.wallpaper-color {
+    background-color: RGB(220, 220, 220);
+}
