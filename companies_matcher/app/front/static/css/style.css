@@ -16,9 +16,17 @@
 
 .tickers-input-row {
     height: 80px;
-    background-color: RGB(190, 190, 190);
+    background-color: RGB(200, 200, 200);
 }
 
 .wallpaper-color {
-    background-color: RGB(220, 220, 220);
+    background-color: RGB(240, 240, 240);
+}
+
+.row-padding {
+    padding-bottom: 20px;
+}
+
+.toggle-multiplicator {
+    margin: 5px;
 }
