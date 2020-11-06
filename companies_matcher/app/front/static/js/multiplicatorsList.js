@@ -1,9 +1,8 @@
-function setMultiplicatorsToggles() {
-    let multiplicatorsList = [
-        "Market Cap", "Book/sh", "Cash/sh", "Recom", "P/E", "Forward P/E", "PEG", "P/S", "P/B", "P/C", "P/FCF",
-        "Quick Ratio", "Current Ratio", "Debt/Eq", "LT Debt/Eq", "ROA", "ROE", "ROI", "Gross Margin",
-        "Oper. Margin", "Profit Margin", "Beta"
-    ];
+async function setMultiplicatorsToggles() {
+    let response = await fetch("/multiplicators/list", {
+      method: "GET"
+    });
+    let multiplicatorsList = (await response.json()).result.multiplicators;
 
     let toggles = document.getElementById('multiplicators-toggles');
 
@@ -25,6 +24,8 @@ function createToggle(name) {
 }
 
 async function clickCreateTableListener() {
+    removeElemById("matching-multiplicators-table")
+
     let multiplicators = [];
     let tickers = parseTickers(document.getElementById("input-tickers").value);
     let toggles = document.getElementById("multiplicators-toggles").childNodes;
@@ -39,7 +40,9 @@ async function clickCreateTableListener() {
         "multiplicators": multiplicators
     };
 
-    let response = await fetch("/matching/multiplicators", {
+    createTableSpiner()
+
+    let response = await fetch("/multiplicators/match", {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8"
@@ -48,6 +51,8 @@ async function clickCreateTableListener() {
     });
 
     let result = (await response.json()).result;
+
+    removeElemById("matching-multiplicators-table-spiner")
 
     setCacheJson('matching_multiplicators', result)
     setCacheJson('multiplicators', multiplicators)
@@ -148,4 +153,29 @@ function setCacheJson(key, value) {
 function getCacheJson(key) {
     let value = localStorage.getItem(key)
     return JSON.parse(value)
+}
+
+
+function createTableSpiner() {
+    let placeForSpiner = document.getElementById("matching-multiplicators");
+    let divFirst = document.createElement("div");
+    divFirst.className = "text-center";
+    divFirst.id = "matching-multiplicators-table-spiner"
+    divFirst.style = "padding-top: 9%"
+    let divSecond = document.createElement("div");
+    divSecond.className = "spinner-border";
+    divSecond.style = "width: 4rem; height: 4rem;"
+    divSecond.setAttribute("role", "status")
+    let span = document.createElement("span");
+    span.className = "sr-only";
+    divSecond.append(span)
+    divFirst.append(divSecond)
+    placeForSpiner.append(divFirst)
+}
+
+function removeElemById(id) {
+    let elem = document.getElementById(id);
+    if (elem) {
+        elem.remove()
+    }
 }
