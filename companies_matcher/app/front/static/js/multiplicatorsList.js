@@ -128,7 +128,6 @@ function clickSwapHeadersListener() {
     }
 }
 
-
 function transformDataForSwap(data) {
     let newData = {}
     let firstKeys = Object.keys(data)
@@ -145,17 +144,6 @@ function transformDataForSwap(data) {
     return newData;
 }
 
-
-function setCacheJson(key, value) {
-    localStorage.setItem(key, JSON.stringify(value))
-}
-
-function getCacheJson(key) {
-    let value = localStorage.getItem(key)
-    return JSON.parse(value)
-}
-
-
 function createTableSpiner() {
     let placeForSpiner = document.getElementById("matching-multiplicators");
     let divFirst = document.createElement("div");
@@ -171,11 +159,4 @@ function createTableSpiner() {
     divSecond.append(span)
     divFirst.append(divSecond)
     placeForSpiner.append(divFirst)
-}
-
-function removeElemById(id) {
-    let elem = document.getElementById(id);
-    if (elem) {
-        elem.remove()
-    }
 }
