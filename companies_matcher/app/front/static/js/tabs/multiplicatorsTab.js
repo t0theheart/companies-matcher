@@ -12,8 +12,6 @@ async function setMultiplicatorsToggles() {
 }
 
 async function clickCreateTableListener() {
-    removeElemById("matching-multiplicators-table");
-
     let multiplicators = [];
     let tickers = parseTickers(document.getElementById("input-tickers").value);
     let toggles = document.getElementById("multiplicators-toggles").childNodes;
@@ -22,6 +20,17 @@ async function clickCreateTableListener() {
             multiplicators.push(item.innerText);
         }
     });
+    if (tickers.length === 0 || multiplicators.length === 0) {
+        if (tickers.length === 0) {
+            showMessage('Enter companies tickers');
+        }
+        if (multiplicators.length === 0) {
+            showMessage('Select multiplicators');
+        }
+        return;
+    }
+
+    removeElemById("matching-multiplicators-table");
 
     let body = {
         "tickers": tickers,
