@@ -3,24 +3,12 @@ async function setMultiplicatorsToggles() {
       method: "GET"
     });
     let multiplicatorsList = (await response.json()).result.multiplicators;
-
     let toggles = document.getElementById('multiplicators-toggles');
 
     multiplicatorsList.forEach(function(item) {
         let toggle = createToggle(item);
         toggles.append(toggle);
     });
-}
-
-function createToggle(name) {
-    let toggle = document.createElement('button');
-    toggle.className = "btn btn-info toggle-multiplicator";
-    toggle.type = "button";
-    toggle.setAttribute("data-toggle", "button");
-    toggle.setAttribute("aria-pressed", "false");
-    toggle.setAttribute("autocomplete", "off");
-    toggle.innerText = name;
-    return toggle;
 }
 
 async function clickCreateTableListener() {
@@ -40,7 +28,7 @@ async function clickCreateTableListener() {
         "multiplicators": multiplicators
     };
 
-    createTableSpiner()
+    createSpiner("matching-multiplicators-table-spiner", "matching-multiplicators")
 
     let response = await fetch("/multiplicators/match", {
       method: "POST",
@@ -58,12 +46,12 @@ async function clickCreateTableListener() {
     setCacheJson('multiplicators', multiplicators)
     setCacheJson('tickers', tickers)
 
-    let table = createTable(result, tickers, multiplicators)
+    let table = createMultiplicatorsTable(result, tickers, multiplicators)
     table.setAttribute("isSwap", "false")
     createSwapHeadersButton()
 }
 
-function createTable(data, columnHeaders, rowHeaders) {
+function createMultiplicatorsTable(data, columnHeaders, rowHeaders) {
     let placeForTable = document.getElementById("matching-multiplicators");
 
     let oldTable = placeForTable.children[0]
@@ -106,9 +94,7 @@ function createSwapHeadersButton() {
         button.className = "btn btn-primary"
         button.innerText = "Swap table headers"
         button.addEventListener("click", clickSwapHeadersListener)
-        console.log(button)
         placeForButton.append(button)
-        console.log(placeForButton)
     }
 }
 
@@ -120,10 +106,10 @@ function clickSwapHeadersListener() {
 
     if (table.getAttribute("isSwap") === "false") {
         data = transformDataForSwap(data)
-        let newTable = createTable(data, multiplicators, tickers)
+        let newTable = createMultiplicatorsTable(data, multiplicators, tickers)
         newTable.setAttribute("isSwap", "true")
     } else {
-        let newTable = createTable(data, tickers, multiplicators)
+        let newTable = createMultiplicatorsTable(data, tickers, multiplicators)
         newTable.setAttribute("isSwap", "false")
     }
 }
@@ -132,6 +118,7 @@ function transformDataForSwap(data) {
     let newData = {}
     let firstKeys = Object.keys(data)
     let secondKeys = Object.keys(data[firstKeys[0]])
+
     secondKeys.forEach(function (key2) {
         let test = {}
         firstKeys.forEach(function (key1) {
@@ -140,23 +127,5 @@ function transformDataForSwap(data) {
             newData[key2] = test
         })
     })
-
     return newData;
-}
-
-function createTableSpiner() {
-    let placeForSpiner = document.getElementById("matching-multiplicators");
-    let divFirst = document.createElement("div");
-    divFirst.className = "text-center";
-    divFirst.id = "matching-multiplicators-table-spiner"
-    divFirst.style = "padding-top: 9%"
-    let divSecond = document.createElement("div");
-    divSecond.className = "spinner-border";
-    divSecond.style = "width: 4rem; height: 4rem;"
-    divSecond.setAttribute("role", "status")
-    let span = document.createElement("span");
-    span.className = "sr-only";
-    divSecond.append(span)
-    divFirst.append(divSecond)
-    placeForSpiner.append(divFirst)
 }
