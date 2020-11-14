@@ -27,28 +27,30 @@
 				</div>
 			</div>
 		</div>
-		<ul class="nav">
-			<li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#multiplicators">Multiplicators</a> </li>
-			<li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#characteristics">Empty</a> </li>
-			<li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#opinion">Empty</a> </li>
-		</ul>
+		<div class="row">
+			<ul class="nav nav-pills nav-fill">
+				<li class="nav-item nav-link tab"> <a class="nav-link tab active tab-text" data-toggle="tab" href="#multiplicators">Multiplicators</a> </li>
+				<li class="nav-item nav-link tab"> <a class="nav-link tab tab-text" data-toggle="tab" href="#empty1">Empty</a> </li>
+				<li class="nav-item nav-link tab"> <a class="nav-link tab tab-text" data-toggle="tab" href="#empty2">Empty</a> </li>
+			</ul>
+		</div>
 		<div class="tab-content">
 			<div class="tab-pane fade show active" id="multiplicators">
 				<div>
 					<div class="form-group" style="padding-top: 19px">
 						<div class="col-sm-12">
-							<h3>Multiplicators</h3> </div>
+							<h3 class="header-text">Multiplicators</h3> </div>
 						<hr>
 						<div id="multiplicators-toggles" class="col-sm-12 row-padding"></div>
 						<div class="col-sm-12 row-padding" id="matching-multiplicators-buttons">
-							<button type="button" class="btn btn-primary" onclick="clickCreateTableListener()">Show companies multiplicators</button>
+							<button type="button" class="btn btn-primary simple-text" onclick="clickCreateTableListener()">Show companies multiplicators</button>
 						</div>
-						<div class="col-sm-12" id="matching-multiplicators"> </div>
 					</div>
 				</div>
+				<div class="col-sm-12 area-for-table" id="matching-multiplicators"></div>
 			</div>
-			<div class="tab-pane fade" id="characteristics"> Empty </div>
-			<div class="tab-pane fade" id="opinion"> Empty </div>
+			<div class="tab-pane fade" id="empty1"> Empty </div>
+			<div class="tab-pane fade" id="empty2"> Empty </div>
 		</div>
 	</div>
 	<!-- Optional JavaScript -->

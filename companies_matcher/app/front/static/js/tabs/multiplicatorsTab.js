@@ -69,12 +69,13 @@ function createMultiplicatorsTable(data, columnHeaders, rowHeaders) {
     }
 
     let table = document.createElement("table");
-    table.className = "table";
+    table.className = "table table-bordered";
     table.id = "matching-multiplicators-table";
 
     columnHeaders.unshift("#");
 
     let headersTr = table.insertRow();
+    headersTr.className = "table-header";
     columnHeaders.forEach(function(item) {
         let td = headersTr.insertCell();
         td.innerHTML = item;
@@ -86,8 +87,10 @@ function createMultiplicatorsTable(data, columnHeaders, rowHeaders) {
             let td = tr.insertCell();
             if (j === 0) {
                 td.innerHTML = rowHeader;
+                td.className = "table-header simple-text";
             } else {
                 td.innerHTML = data[columnHeader][rowHeader];
+                td.className = "table-cell simple-text"; // https://encycolorpedia.ru/10707f
             }
         });
     });
@@ -100,7 +103,7 @@ function createSwapHeadersButton() {
     let oldTable = placeForButton.children[1];
     if (!oldTable) {
         let button = document.createElement("button");
-        button.className = "btn btn-primary";
+        button.className = "btn btn-primary simple-text";
         button.innerText = "Swap table headers";
         button.addEventListener("click", clickSwapHeadersListener);
         placeForButton.append(button);
