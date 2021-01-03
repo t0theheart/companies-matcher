@@ -49,4 +49,4 @@ class MarketwatchParser(ParserABC):
                     data[topic] = values
         period = self._parse_period(soup)
         result = self._combine_data_with_period(data, period)
-        return result, period
+        return result
