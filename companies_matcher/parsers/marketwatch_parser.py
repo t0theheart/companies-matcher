@@ -5,17 +5,19 @@ import aiohttp
 
 
 URL = config['marketwatch']['url']
+ENDPOINT = config['marketwatch']['endpoint']
 HEADERS = {'User-Agent': config['service']['userAgent']}
 
 
 class MarketwatchParser(ParserABC):
     _url = URL
+    _endpoint = ENDPOINT
     _headers = HEADERS
 
     def __init__(self, report: str, tickers: list, topics: list):
         self._tickers = tickers
         self._topics = topics
-        self._endpoint = report
+        self._report = report
 
     @staticmethod
     def _parse_period(soup: BeautifulSoup):
@@ -32,7 +34,7 @@ class MarketwatchParser(ParserABC):
         return result
 
     async def _request_html(self, ticker: str):
-        url = self._url + f'{ticker}/{self._endpoint}'
+        url = self._url + f'{ticker}/{self._endpoint}/{self._report}'
         async with aiohttp.ClientSession() as session:
             async with session.get(url, headers=self._headers) as resp:
                 return await resp.text()
