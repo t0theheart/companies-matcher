@@ -19,8 +19,8 @@ class MarketwatchParser(ParserABC):
 
     @staticmethod
     def _parse_period(soup: BeautifulSoup):
-        row = soup.find('tr', class_='topRow')
-        return [i.text for i in row.find_all('th', scope='col')][:-1]
+        row = soup.find('thead', class_='table__header')
+        return [i.text for i in row.find_all('div', attrs={'class': 'cell__content'})[2:-1]]
 
     @staticmethod
     def _combine_data_with_period(data: dict, period: list):
@@ -40,12 +40,12 @@ class MarketwatchParser(ParserABC):
     def _parse_html(self, html: str):
         data = dict()
         soup = BeautifulSoup(html, "html.parser")
-        rows = soup.find_all('tr')
+        rows = soup.find_all('tr', attrs={'class': 'table__row'})
         for row in rows:
-            if c := row.find('td', class_='rowTitle'):
-                topic = c.text.strip()
+            if cells := row.find_all('div', class_='cell__content'):
+                topic = cells[0].text
                 if topic in self._topics:
-                    values = [i.text for i in row.find_all('td', class_='valueCell')]
+                    values = [i.text for i in cells[2:-1]]
                     data[topic] = values
         period = self._parse_period(soup)
         result = self._combine_data_with_period(data, period)
