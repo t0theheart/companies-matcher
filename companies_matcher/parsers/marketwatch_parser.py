@@ -4,15 +4,10 @@ from .abc import ParserABC
 import aiohttp
 
 
-URL = config['marketwatch']['url']
-ENDPOINT = config['marketwatch']['endpoint']
-HEADERS = {'User-Agent': config['service']['userAgent']}
-
-
 class MarketwatchParser(ParserABC):
-    _url = URL
-    _endpoint = ENDPOINT
-    _headers = HEADERS
+    _url = config['marketwatch']['url']
+    _endpoint = config['marketwatch']['endpoint']
+    _headers = {'User-Agent': config['service']['userAgent']}
 
     def __init__(self, report: str, tickers: list, topics: list):
         self._tickers = tickers

@@ -4,13 +4,9 @@ from .abc import ParserABC
 import aiohttp
 
 
-URL = config['finviz']['url']
-HEADERS = {'User-Agent': config['service']['userAgent']}
-
-
 class FinvizParser(ParserABC):
-    _url = URL
-    _headers = HEADERS
+    _url = config['finviz']['url']
+    _headers = {'User-Agent': config['service']['userAgent']}
 
     def __init__(self, tickers: list, multiplicators: list):
         self._tickers = tickers
