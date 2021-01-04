@@ -8,3 +8,15 @@ function createToggle(text) {
     toggle.innerText = text;
     return toggle;
 }
+
+async function getAndCreateToggleList(endpoint, elementId) {
+    let response = await fetch(endpoint, {
+      method: "GET"
+    });
+    let result = (await response.json()).result;
+    let toggles = document.getElementById(elementId);
+    result.forEach(function(item) {
+        let toggle = createToggle(item);
+        toggles.append(toggle);
+    });
+}

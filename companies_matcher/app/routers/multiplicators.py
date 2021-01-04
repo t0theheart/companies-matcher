@@ -13,11 +13,9 @@ async def match_multiplicators(params: MatchingMultiplicatorsParams, request: Re
 
 @multiplicators_router.get("/list")
 async def get_multiplicators_list(request: Request):
-    result = {
-        "multiplicators": [
-            "Market Cap", "Book/sh", "Cash/sh", "Recom", "P/E", "Forward P/E", "PEG", "P/S", "P/B", "P/C", "P/FCF",
-            "Quick Ratio", "Current Ratio", "Debt/Eq", "LT Debt/Eq", "ROA", "ROE", "ROI", "Gross Margin",
-            "Oper. Margin", "Profit Margin", "Beta"
-        ]
-    }
+    result = [
+        "Market Cap", "Book/sh", "Cash/sh", "Recom", "P/E", "Forward P/E", "PEG", "P/S", "P/B", "P/C", "P/FCF",
+        "Quick Ratio", "Current Ratio", "Debt/Eq", "LT Debt/Eq", "ROA", "ROE", "ROI", "Gross Margin",
+        "Oper. Margin", "Profit Margin", "Beta"
+    ]
     return {'result': result}

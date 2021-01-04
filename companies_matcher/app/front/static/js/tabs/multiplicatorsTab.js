@@ -1,16 +1,3 @@
-async function setMultiplicatorsToggles() {
-    let response = await fetch("/multiplicators/list", {
-      method: "GET"
-    });
-    let multiplicatorsList = (await response.json()).result.multiplicators;
-    let toggles = document.getElementById('multiplicators-toggles');
-
-    multiplicatorsList.forEach(function(item) {
-        let toggle = createToggle(item);
-        toggles.append(toggle);
-    });
-}
-
 async function clickCreateTableListener() {
     let multiplicators = [];
     let tickers = parseTickers(document.getElementById("input-tickers").value);
