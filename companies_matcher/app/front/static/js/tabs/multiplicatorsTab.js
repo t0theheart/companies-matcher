@@ -1,12 +1,7 @@
 async function clickCreateTableListener() {
-    let multiplicators = [];
     let tickers = parseTickers(document.getElementById("input-tickers").value);
-    let toggles = document.getElementById("multiplicators-toggles").childNodes;
-    toggles.forEach(function(item){
-        if (item.getAttribute("aria-pressed") === "true") {
-            multiplicators.push(item.innerText);
-        }
-    });
+    let multiplicators = getValuesFromPressedToggles("multiplicators-toggles");
+
     if (tickers.length === 0 || multiplicators.length === 0) {
         if (tickers.length === 0) {
             showMessage('Enter companies tickers');

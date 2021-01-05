@@ -3,7 +3,7 @@ function createSpiner(id, elemId) {
     let divFirst = document.createElement("div");
     divFirst.className = "text-center";
     divFirst.id = id
-    divFirst.style = "padding-top: 9%"
+    divFirst.style = "padding-top: 9%; padding-bottom: 9%"
     let divSecond = document.createElement("div");
     divSecond.className = "spinner-border";
     divSecond.style = "width: 4rem; height: 4rem;"

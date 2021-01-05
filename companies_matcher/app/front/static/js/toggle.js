@@ -20,3 +20,14 @@ async function getAndCreateToggleList(endpoint, elementId) {
         toggles.append(toggle);
     });
 }
+
+function getValuesFromPressedToggles(elementId) {
+    let values = [];
+    let toggles = document.getElementById(elementId).childNodes;
+    toggles.forEach(function(item){
+        if (item.getAttribute("aria-pressed") === "true") {
+            values.push(item.innerText);
+        }
+    });
+    return values
+}
