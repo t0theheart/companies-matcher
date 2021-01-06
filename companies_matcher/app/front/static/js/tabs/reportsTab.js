@@ -48,7 +48,7 @@ async function clickCreateReportsTableListener() {
     let result = (await response.json()).result;
 
     removeElemById("matching-reports-table-spiner");
-    let table = createReportsTable(result.data, tickers, topics, result.period);
+    createReportsTable(result.data, tickers, topics, result.period);
 
 }
 
@@ -63,6 +63,7 @@ function createReportsTable(data, mainRowHeaders, childRowHeaders, columnHeaders
     let table = document.createElement("table");
     table.className = "table table-bordered";
     table.id = "matching-reports-table";
+    table.coloredCells = {};
 
     columnHeaders.unshift("Topics");
     columnHeaders.unshift("Companies");
@@ -79,6 +80,7 @@ function createReportsTable(data, mainRowHeaders, childRowHeaders, columnHeaders
             let tr = table.insertRow();
             columnHeaders.forEach(function (columnHeader, columnHeaderNum) {
                 let td = tr.insertCell();
+                td.addEventListener("click",clickReportsTableCellListener);
                 if (columnHeaderNum === 0 ) {
                     td.className = "table-header simple-text";
                     if (childRowHeaderNum === 0) {
@@ -98,4 +100,39 @@ function createReportsTable(data, mainRowHeaders, childRowHeaders, columnHeaders
         });
     });
     placeForTable.append(table);
+}
+
+function clickReportsTableCellListener(event) {
+    let columnIndex = event.originalTarget.cellIndex;
+    if (columnIndex < 2) {
+        return;
+    }
+    let topic = event.originalTarget.parentElement.children[1].innerText;
+    let table = event.originalTarget.offsetParent;
+
+    if (table.coloredCells.columnIndex) {
+        changeCellsColorInReportsTable(table, table.coloredCells.columnIndex, table.coloredCells.topic, "table-cell simple-text") ;
+    }
+
+    if (table.coloredCells.columnIndex === columnIndex && table.coloredCells.topic === topic) {
+        changeCellsColorInReportsTable(table, columnIndex, topic, "table-cell simple-text");
+        table.coloredCells = {};
+    } else {
+       changeCellsColorInReportsTable(table, columnIndex, topic, "colored-table-cell simple-text");
+       table.coloredCells = {
+           columnIndex: columnIndex,
+           topic: topic
+        };
+    }
+}
+
+
+function changeCellsColorInReportsTable(table, columnIndex, topic, style) {
+    let rows = table.children[0].children;
+    for (let i = 1; i < rows.length; i++) {
+        let cells = rows[i].cells
+        if (cells[1].innerText === topic) {
+            cells[columnIndex].className = style
+        }
+    }
 }

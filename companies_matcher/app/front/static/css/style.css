@@ -75,6 +75,12 @@ input{
     color: black;
 }
 
+.colored-table-cell {
+    font-size: 20px;
+    color: black;
+    background-color: RGB(255, 255, 255);
+}
+
 
 
 table.table-bordered{
