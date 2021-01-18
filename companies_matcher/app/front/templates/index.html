@@ -31,10 +31,10 @@
 			<ul class="nav nav-pills nav-fill">
 				<li class="nav-item nav-link tab"> <a class="nav-link tab active tab-text" data-toggle="tab" href="#multiplicators">Multiplicators</a> </li>
 				<li class="nav-item nav-link tab"> <a class="nav-link tab tab-text" data-toggle="tab" href="#reports">Reports</a> </li>
-				<li class="nav-item nav-link tab"> <a class="nav-link tab tab-text" data-toggle="tab" href="#empty2">Empty</a> </li>
+				<li class="nav-item nav-link tab"> <a class="nav-link tab tab-text" data-toggle="tab" onclick="onTabClickListener()" href="#dividends">Dividends</a> </li>
 			</ul>
 		</div>
-		<div class="tab-content">
+			<div class="tab-content">
 			<div class="tab-pane fade show active" id="multiplicators">
 				<div>
 					<div class="form-group" style="padding-top: 19px">
@@ -43,7 +43,7 @@
 						<hr>
 						<div id="multiplicators-toggles" class="col-sm-12 row-padding"></div>
 						<div class="col-sm-12 row-padding" id="matching-multiplicators-buttons">
-							<button type="button" class="btn btn-primary simple-text" onclick="clickCreateTableListener()">Match companies multiplicators</button>
+								<button type="button" class="btn btn-primary simple-text" onclick="clickCreateTableListener()">Match companies multiplicators</button>
 						</div>
 					</div>
 				</div>
@@ -66,7 +66,26 @@
 				</div>
 				<div class="col-sm-12 area-for-table" id="matching-reports"></div>
 			</div>
-			<div class="tab-pane fade" id="empty2"> Empty </div>
+			<div class="tab-pane fade" id="dividends">
+				<div class="col-sm-12 row-padding" id="dividends-buttons-1">
+					<table class="table table-bordered" id="dividends-table">
+					  <tbody>
+						<tr class="table-header">
+						  <td>Ticker</td>
+						  <td>Amount</td>
+						  <td>Dividends</td>
+						  <td>Year</td>
+						</tr>
+					  </tbody>
+					</table>
+					<hr>
+						<button type="button" class="btn btn-primary simple-text" onclick="createDividendRow()">Add fields</button>
+				</div>
+				<hr>
+				<div class="col-sm-12 row-padding" id="dividends-buttons-2">
+						<button type="button" class="btn btn-primary simple-text" onclick="console.log(123)">Get dividends info</button>
+				</div>
+			</div>
 		</div>
 	</div>
 	<!-- Optional JavaScript -->
@@ -78,6 +97,7 @@
 	<script src="scripts/tickersInput.js"></script>
 	<script src="scripts/tabs/multiplicatorsTab.js"></script>
 	<script src="scripts/tabs/reportsTab.js"></script>
+	<script src="scripts/tabs/dividendsTab.js"></script>
 	<script src="scripts/domMethods.js"></script>
 	<script src="scripts/storageMethods.js"></script>
 	<script src="scripts/toggle.js"></script>
