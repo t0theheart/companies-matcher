@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from companies_matcher.app.routers import index_router, multiplicators_router, reports_router
+from companies_matcher.app.routers import index_router, multiplicators_router, reports_router, dividends_router
 from companies_matcher.parsers import FinvizParser, MarketwatchParser
 from fastapi.staticfiles import StaticFiles
 
@@ -17,4 +17,5 @@ async def init_app():
 
     app.include_router(multiplicators_router, prefix='/multiplicators')
     app.include_router(reports_router, prefix='/reports')
+    app.include_router(dividends_router, prefix='/dividends')
     app.include_router(index_router)

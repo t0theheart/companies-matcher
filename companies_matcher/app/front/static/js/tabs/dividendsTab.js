@@ -20,3 +20,36 @@ function createDividendRow() {
         }
     }
 }
+
+function getDataFromDividendsTable() {
+    let data = [];
+    let keys = {0: 'ticker', 1: 'amount'}
+    let table = document.getElementById('dividends-table');
+    let rows = table.rows;
+    for (let i = 1; i < table.rows.length; i++) {
+        let obj = {};
+        for (let j = 0; j < 2; j++) {
+            obj[keys[j]] = rows[i].cells[j].children[0].value
+        }
+        data.push(obj);
+    }
+    return data;
+}
+
+
+async function clickGetDividendsInfoListener() {
+    let data = getDataFromDividendsTable('dividends-table');
+    console.log(data);
+
+    let body = {
+        "dividends": data,
+    };
+
+    let response = await fetch("/dividends/match", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8"
+      },
+      body: JSON.stringify(body)
+    });
+}

@@ -11,3 +11,12 @@ class MatchingReportsParams(BaseModel):
     tickers: List[str]
     topics: List[str]
     reports: List[str]
+
+
+class DividendModel(BaseModel):
+    ticker: str
+    amount: int
+
+
+class MatchingDividendsParams(BaseModel):
+    dividends: List[DividendModel]
