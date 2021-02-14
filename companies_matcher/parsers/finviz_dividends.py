@@ -9,9 +9,11 @@ def _join_result(data: list, dividends: dict):
         t = item['ticker']
         div = dividends[t][_multiplicator]
         try:
-            item['dividends'] = float(div) * item['amount']
+            item['total'] = round(float(div) * item['amount'], 2)
+            item['dividends'] = round(float(div), 2)
         except ValueError:
-            item['dividends'] = div
+            item['total'] = 0
+            item['dividends'] = 0
 
 
 async def get_dividends(data: list):
