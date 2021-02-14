@@ -1,10 +1,3 @@
-function onTabClickListener() {
-    let tickers = document.getElementById('input-tickers').value;
-    let parsedTickers = parseTickers(tickers);
-    console.log(parsedTickers);
-}
-
-
 function createDividendRow() {
     let table = document.getElementById('dividends-table');
     console.log(table);
@@ -39,7 +32,6 @@ function getDataFromDividendsTable() {
 
 async function clickGetDividendsInfoListener() {
     let data = getDataFromDividendsTable('dividends-table');
-    console.log(data);
 
     let body = {
         "dividends": data,
@@ -52,4 +44,22 @@ async function clickGetDividendsInfoListener() {
       },
       body: JSON.stringify(body)
     });
+
+    let result = (await response.json()).result;
+    insertDividendsToTable(result)
+}
+
+function insertDividendsToTable(data) {
+    let table = document.getElementById('dividends-table');
+    let rows = table.rows;
+    data.forEach(function (item) {
+        for (let i = 1; i < table.rows.length; i++) {
+            if (rows[i].cells[0].children[0].value === item['ticker']) {
+                rows[i].cells[2].innerHTML = item['dividends']
+                rows[i].cells[3].innerHTML =item['total']
+                rows[i].cells[2].className = "table-cell simple-text";
+                rows[i].cells[3].className = "table-cell simple-text";
+            }
+        }
+    })
 }
