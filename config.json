@@ -1,19 +1,29 @@
-{"config": {
+{
+  "config": {
     "service": {
-      "userAgent": ""
+      "userAgent": "Mozilla/5.0 (Windows NT 6.2; Win64; x64; rv:16.0.1) Gecko/20121011 Firefox/16.0.1"
     },
     "finviz": {
-      "url": "",
-      "multiplicators": [],
-      "tickers": []
+      "url": "https://finviz.com/quote.ashx",
+      "multiplicators": [
+        "Market Cap", "Book/sh", "Cash/sh", "Recom", "P/E", "Forward P/E", "PEG", "P/S", "P/B", "P/C", "P/FCF",
+        "Quick Ratio", "Current Ratio", "Debt/Eq", "LT Debt/Eq", "ROA", "ROE", "ROI", "Gross Margin",
+        "Oper. Margin", "Profit Margin", "Beta"
+      ]
     },
   "marketwatch": {
-      "url": "",
-      "tickers": [],
-      "topics": [],
-      "endpoints": {
-        "incomeStatement": ""
-      }
+      "url": "https://www.marketwatch.com/investing/stock/",
+      "endpoint": "financials",
+      "incomeTopics": [
+        "Sales/Revenue", "Gross Income", "Net Income", "EPS (Basic)", "EBITDA"
+      ],
+      "balanceTopics": [
+        "Cash & Short Term Investments", "Total Current Assets", "Net Property, Plant & Equipment", "Total Assets",
+        "Total Liabilities"
+      ],
+      "cashTopics": [
+        "Net Operating Cash Flow", "Free Cash Flow"
+      ]
     }
   }
 }

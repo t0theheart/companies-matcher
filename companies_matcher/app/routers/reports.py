@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Request
 from companies_matcher.app.serializers import MatchingReportsParams
 from companies_matcher.parsers.marketwatch_reports import get_reports
+from companies_matcher.config import config
 
 reports_router = APIRouter()
 
@@ -13,24 +14,14 @@ async def match_reports(params: MatchingReportsParams, request: Request):
 
 @reports_router.get("/income/topics")
 async def get_income_topics(request: Request):
-    result = [
-        "Sales/Revenue", "Gross Income", "Net Income", "EPS (Basic)", "EBITDA"
-    ]
-    return {'result': result}
+    return {'result': config['marketwatch']['incomeTopics']}
 
 
 @reports_router.get("/balance/topics")
 async def get_balance_topics(request: Request):
-    result = [
-        "Cash & Short Term Investments", "Total Current Assets", "Net Property, Plant & Equipment", "Total Assets",
-        "Total Liabilities"
-    ]
-    return {'result': result}
+    return {'result': config['marketwatch']['balanceTopics']}
 
 
 @reports_router.get("/cash/topics")
 async def get_cash_topics(request: Request):
-    result = [
-        "Net Operating Cash Flow", "Free Cash Flow"
-    ]
-    return {'result': result}
+    return {'result': config['marketwatch']['cashTopics']}
