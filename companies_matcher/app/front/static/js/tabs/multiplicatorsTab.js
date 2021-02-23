@@ -2,36 +2,22 @@ async function clickCreateTableListener() {
     let tickers = parseTickers(document.getElementById("input-tickers").value);
     let multiplicators = getValuesFromPressedToggles("multiplicators-toggles");
 
-    if (tickers.length === 0 || multiplicators.length === 0) {
-        if (tickers.length === 0) {
-            showMessage('Enter companies tickers');
-        }
-        if (multiplicators.length === 0) {
-            showMessage('Select multiplicators');
-        }
-        return;
-    }
-
     removeElemById("matching-multiplicators-table");
-
-    let body = {
-        "tickers": tickers,
-        "multiplicators": multiplicators
-    };
-
     createSpiner("matching-multiplicators-table-spiner", "matching-multiplicators");
 
-    let response = await fetch("/multiplicators/match", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json;charset=utf-8"
-      },
-      body: JSON.stringify(body)
-    });
-
-    let result = (await response.json()).result;
+    let result = await myFetch(
+        "/multiplicators/match",
+        "POST",
+        {"tickers": tickers, "multiplicators": multiplicators},
+        {"Content-Type": "application/json;charset=utf-8"},
+        wrappedShowMessage('Companies tickers and multiplicators must be filled')
+    )
 
     removeElemById("matching-multiplicators-table-spiner");
+
+    if (!result) {
+        return;
+    }
 
     setCacheJson('matching_multiplicators', result);
     setCacheJson('multiplicators', multiplicators);

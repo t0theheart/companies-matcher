@@ -1,6 +1,5 @@
 function createDividendRow() {
     let table = document.getElementById('dividends-table');
-    console.log(table);
     let tr = table.insertRow();
     tr.className = "table-cell simple-text";
     for (let i = 0; i < 4; i++) {
@@ -31,21 +30,13 @@ function getDataFromDividendsTable() {
 
 
 async function clickGetDividendsInfoListener() {
-    let data = getDataFromDividendsTable('dividends-table');
-
-    let body = {
-        "dividends": data,
-    };
-
-    let response = await fetch("/dividends/match", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json;charset=utf-8"
-      },
-      body: JSON.stringify(body)
-    });
-
-    let result = (await response.json()).result;
+    let result = await myFetch(
+        "/dividends/match",
+        "POST",
+        {"dividends": getDataFromDividendsTable('dividends-table')},
+        {"Content-Type": "application/json;charset=utf-8"},
+        wrappedShowMessage('All field must be filled')
+    )
     insertDividendsToTable(result)
 }
 

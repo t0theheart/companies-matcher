@@ -4,16 +4,6 @@ async function clickCreateReportsTableListener() {
     let balanceTopics = getValuesFromPressedToggles("balance-toggles");
     let cashTopics = getValuesFromPressedToggles("cash-toggles");
 
-    if (tickers.length === 0 || (incomeTopics.length === 0 && balanceTopics.length === 0 && cashTopics.length === 0)) {
-        if (tickers.length === 0) {
-            showMessage('Enter companies tickers');
-        }
-        if (incomeTopics.length === 0 && balanceTopics.length === 0 && cashTopics.length === 0) {
-            showMessage('Select any reports topics');
-        }
-        return;
-    }
-
     removeElemById("matching-reports-table");
 
     let reports = [];
@@ -29,25 +19,22 @@ async function clickCreateReportsTableListener() {
 
     let topics = incomeTopics.concat(balanceTopics.concat(cashTopics))
 
-    let body = {
-        "tickers": tickers,
-        "topics": topics,
-        "reports": reports
-    };
-
     createSpiner("matching-reports-table-spiner", "matching-reports");
 
-    let response = await fetch("/reports/match", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json;charset=utf-8"
-      },
-      body: JSON.stringify(body)
-    });
-
-    let result = (await response.json()).result;
+    let result = await myFetch(
+        "/reports/match",
+        "POST",
+        {"tickers": tickers, "topics": topics, "reports": reports},
+        {"Content-Type": "application/json;charset=utf-8"},
+        wrappedShowMessage('Companies tickers and any reports topics must be filled')
+    )
 
     removeElemById("matching-reports-table-spiner");
+
+    if (!result) {
+        return;
+    }
+
     createReportsTable(result.data, tickers, topics, result.period);
 
 }

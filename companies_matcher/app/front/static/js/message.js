@@ -23,3 +23,10 @@ function createMessagesContainer() {
     container.style.cssText = 'position: fixed; bottom: 15px; right: 15px; width: 350px;';
     document.body.appendChild(container);
 }
+
+function wrappedShowMessage(text) {
+    function wrapper() {
+        showMessage(text)
+    }
+    return wrapper
+}
