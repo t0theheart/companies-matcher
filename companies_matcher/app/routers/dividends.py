@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Request
+from fastapi import APIRouter
 from companies_matcher.app.serializers import MatchingDividendsParams
 from companies_matcher.parsers.finviz_dividends import get_dividends
 
