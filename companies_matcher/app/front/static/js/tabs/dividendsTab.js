@@ -2,7 +2,7 @@ function createDividendRow() {
     let table = document.getElementById('dividends-table');
     let tr = table.insertRow();
     tr.className = "table-cell simple-text";
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 5; i++) {
         let td = tr.insertCell();
         if (i<2) {
             let input = document.createElement('input');
@@ -10,7 +10,20 @@ function createDividendRow() {
             input.size = 1;
             td.append(input);
         }
+        if (i === 4) {
+            let button = document.createElement('button');
+            button.className = 'btn btn-danger';
+            button.innerText = 'X';
+            button.onclick = deleteRow;
+            td.append(button);
+        }
     }
+}
+
+function deleteRow(event) {
+    let row = event.originalTarget.parentElement.parentElement;
+    let tableBody = row.parentElement;
+    tableBody.removeChild(row)
 }
 
 function getDataFromDividendsTable() {
