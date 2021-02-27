@@ -7,10 +7,13 @@ _multiplicator = 'Dividend'
 def _join_result(data: list, dividends: dict):
     for item in data:
         t = item['ticker']
-        div = dividends[t][_multiplicator]
         try:
+            div = dividends[t][_multiplicator]
             item['total'] = round(float(div) * item['amount'], 2)
             item['dividends'] = round(float(div), 2)
+        except KeyError:
+            item['total'] = 0
+            item['dividends'] = 0
         except ValueError:
             item['total'] = 0
             item['dividends'] = 0

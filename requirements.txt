@@ -3,4 +3,3 @@ uvicorn
 aiohttp
 bs4
 jinja2
-aiofiles

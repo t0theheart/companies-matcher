@@ -4,4 +4,5 @@ async function start() {
     await getAndCreateToggleList('/reports/income/topics', 'income-toggles');
     await getAndCreateToggleList('/reports/balance/topics', 'balance-toggles');
     await getAndCreateToggleList('/reports/cash/topics', 'cash-toggles');
+    createDividendRow();
 }
