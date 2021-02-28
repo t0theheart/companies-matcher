@@ -14,6 +14,7 @@ async def init_app():
 
     app.mount("/static", StaticFiles(directory="companies_matcher/app/front/static/css"), name="static")
     app.mount("/scripts", StaticFiles(directory="companies_matcher/app/front/static/js"), name="scripts")
+    app.mount("/images", StaticFiles(directory="companies_matcher/app/front/static/images"), name="images")
 
     app.include_router(multiplicators_router, prefix='/multiplicators')
     app.include_router(reports_router, prefix='/reports')
