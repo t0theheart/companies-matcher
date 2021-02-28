@@ -1,5 +1,5 @@
-function createSpiner(id, elemId) {
-    let placeForSpiner = document.getElementById(elemId);
+function createSpinner(id, elemId) {
+    let placeForSpinner = document.getElementById(elemId);
     let divFirst = document.createElement("div");
     divFirst.className = "text-center";
     divFirst.id = id
@@ -12,5 +12,5 @@ function createSpiner(id, elemId) {
     span.className = "sr-only";
     divSecond.append(span)
     divFirst.append(divSecond)
-    placeForSpiner.append(divFirst)
+    placeForSpinner.append(divFirst)
 }

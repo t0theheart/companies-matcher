@@ -1,7 +1,7 @@
 function createDividendRow() {
     let table = document.getElementById('dividends-table');
     let tr = table.insertRow();
-    tr.className = "table-cell simple-text";
+    tr.className = "table-cell";
     for (let i = 0; i < 5; i++) {
         let td = tr.insertCell();
         if (i<2) {
@@ -15,7 +15,12 @@ function createDividendRow() {
             button.className = 'btn btn-danger';
             button.innerText = 'X';
             button.onclick = deleteRow;
+            button.hidden = false;
             td.append(button);
+            let span = document.createElement("span");
+            span.className = "spinner-border m-1";
+            span.hidden = true;
+            td.append(span);
         }
     }
 }
@@ -43,6 +48,7 @@ function getDataFromDividendsTable() {
 
 
 async function clickGetDividendsInfoListener() {
+    turnOnSpinners(true)
     let result = await myFetch(
         "/dividends/match",
         "POST",
@@ -51,6 +57,7 @@ async function clickGetDividendsInfoListener() {
         wrappedShowMessage('All field must be filled')
     )
     insertDividendsToTable(result)
+    turnOnSpinners(false)
 }
 
 function insertDividendsToTable(data) {
@@ -66,4 +73,13 @@ function insertDividendsToTable(data) {
             }
         }
     })
+}
+
+function turnOnSpinners(turnOn) {
+    let table = document.getElementById('dividends-table');
+    let rows = table.rows;
+    for (let i = 1; i < rows.length; i++) {
+        rows[i].cells[4].children[0].hidden = turnOn
+        rows[i].cells[4].children[1].hidden = !turnOn
+    }
 }
