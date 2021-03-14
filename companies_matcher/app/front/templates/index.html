@@ -10,8 +10,7 @@
 	<!-- Project CSS -->
 	<link href="static/style.css" rel="stylesheet">
 	<title>Companies Matcher</title>
-	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-</head>
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon"> </head>
 
 <body class="wallpaper-color">
 	<div class="container-fluid">
@@ -35,7 +34,7 @@
 				<li class="nav-item nav-link tab"> <a class="nav-link tab tab-text" data-toggle="tab" href="#dividends">Dividends</a> </li>
 			</ul>
 		</div>
-			<div class="tab-content">
+		<div class="tab-content">
 			<div class="tab-pane fade show active" id="multiplicators">
 				<div>
 					<div class="form-group" style="padding-top: 19px">
@@ -44,7 +43,7 @@
 						<hr>
 						<div id="multiplicators-toggles" class="col-sm-12 row-padding"></div>
 						<div class="col-sm-12 row-padding" id="matching-multiplicators-buttons">
-								<button type="button" class="btn btn-primary simple-text" onclick="clickCreateTableListener()">Match companies multiplicators</button>
+							<button type="button" class="btn btn-primary simple-text" onclick="clickCreateTableListener()">Match companies multiplicators</button>
 						</div>
 					</div>
 				</div>
@@ -52,13 +51,16 @@
 			</div>
 			<div class="tab-pane fade" id="reports">
 				<div class="form-group" style="padding-top: 19px">
-					<div class="col-sm-12"><h3 class="header-text">Income</h3></div>
+					<div class="col-sm-12">
+						<h3 class="header-text">Income</h3></div>
 					<hr>
 					<div id="income-toggles" class="col-sm-12 row-padding"></div>
-					<div class="col-sm-12"><h3 class="header-text">Balance</h3></div>
+					<div class="col-sm-12">
+						<h3 class="header-text">Balance</h3></div>
 					<hr>
 					<div id="balance-toggles" class="col-sm-12 row-padding"></div>
-					<div class="col-sm-12"><h3 class="header-text">Cash</h3></div>
+					<div class="col-sm-12">
+						<h3 class="header-text">Cash</h3></div>
 					<hr>
 					<div id="cash-toggles" class="col-sm-12 row-padding"></div>
 					<div class="col-sm-12 row-padding" id="matching-reports-buttons">
@@ -68,24 +70,27 @@
 				<div class="col-sm-12 area-for-table" id="matching-reports"></div>
 			</div>
 			<div class="tab-pane fade" id="dividends">
+				<div class="col-sm-12">
+					<h3 class="header-text">Dividends</h3> </div>
+				<hr>
 				<div class="col-sm-12 row-padding" id="dividends-buttons-1">
 					<table class="table table-bordered" id="dividends-table">
-					  <tbody>
-						<tr class="table-header">
-						  <td>Ticker</td>
-						  <td>Amount</td>
-						  <td>Dividends</td>
-						  <td>Total in year</td>
-						  <td width="70"></td>
-						</tr>
-					  </tbody>
+						<tbody>
+							<tr class="table-header">
+								<td>Ticker</td>
+								<td>Amount</td>
+								<td>Dividends</td>
+								<td>Total in year</td>
+								<td width="70"></td>
+							</tr>
+						</tbody>
 					</table>
 					<hr>
-						<button type="button" class="btn btn-primary simple-text" onclick="createDividendRow()">Add fields</button>
+					<button type="button" class="btn btn-primary simple-text" onclick="createDividendRow()">Add fields</button>
 				</div>
 				<hr>
 				<div class="col-sm-12 row-padding" id="dividends-buttons-2">
-						<button type="button" class="btn btn-primary simple-text" onclick="clickGetDividendsInfoListener()">Get dividends info</button>
+					<button type="button" class="btn btn-primary simple-text" onclick="clickGetDividendsInfoListener()">Get dividends info</button>
 				</div>
 			</div>
 		</div>
@@ -108,7 +113,7 @@
 	<script src="scripts/start.js"></script>
 	<script src="scripts/myFetch.js"></script>
 	<script>
-		start();
+	start();
 	</script>
 </body>
 
