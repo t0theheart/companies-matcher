@@ -3,7 +3,7 @@ async function clickCreateTableListener() {
     let multiplicators = getValuesFromPressedToggles("multiplicators-toggles");
 
     removeElemById("matching-multiplicators-table");
-    createSpiner("matching-multiplicators-table-spiner", "matching-multiplicators");
+    createSpinner("matching-multiplicators-table-spiner", "matching-multiplicators");
 
     let result = await myFetch(
         "/multiplicators/match",

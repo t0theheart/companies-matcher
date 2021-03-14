@@ -19,7 +19,7 @@ async function clickCreateReportsTableListener() {
 
     let topics = incomeTopics.concat(balanceTopics.concat(cashTopics))
 
-    createSpiner("matching-reports-table-spiner", "matching-reports");
+    createSpinner("matching-reports-table-spiner", "matching-reports");
 
     let result = await myFetch(
         "/reports/match",

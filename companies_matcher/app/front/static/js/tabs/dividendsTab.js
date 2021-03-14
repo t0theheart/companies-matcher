@@ -56,7 +56,9 @@ async function clickGetDividendsInfoListener() {
         {"Content-Type": "application/json;charset=utf-8"},
         wrappedShowMessage('All field must be filled')
     )
-    insertDividendsToTable(result)
+    if (!!result) {
+        insertDividendsToTable(result)
+    }
     turnOnSpinners(false)
 }
 
